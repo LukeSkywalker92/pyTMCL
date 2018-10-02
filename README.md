@@ -1,7 +1,7 @@
 Python TMCL client library
 ==========================
 
-Python wrapper around Trinamic's TMCL serial interface for controlling TMCM stepper modules 
+Python wrapper around Trinamic's TMCL serial interface for controlling TMCM stepper modules
 via a serial-to-rs485 converter.
 
 
@@ -11,13 +11,13 @@ Installation
 
 ### Install using pip
 ```sh
-> pip install tmcl
+> pip install pytmcl
 ```
 
 ### Install without pip
 ```sh
-> git clone https://github.com/NativeDesign/python-tmcl.git
-> cd python-tmcl
+> git clone https://github.com/LukeSkywalker92/pyTMCL.git
+> cd pyTMCL
 > python setup.py install
 ```
 
@@ -26,7 +26,7 @@ Usage
 -----
 
 Use an RS485-to-serial adapter to connect your PC to one or more TMCM modules.
-Before starting you should check the modules' serial-address and baud-rate is 
+Before starting you should check the modules' serial-address and baud-rate is
 a known value. Out of the box (_warning: anecdotal_) modules usually have an address
 of `1` and a baud-rate of `9600` but this is not guarenteed. The easiest way to check
 these values is by using the [TMCL IDE][1] on a windows machine.
@@ -53,7 +53,7 @@ bus = TMCL.connect(serial_port)
 ## Get the motor
 motor = bus.get_motor(MODULE_ADDRESS)
 
-## From this point you can start issuing TMCL commands 
+## From this point you can start issuing TMCL commands
 ## to the motor as per the TMCL docs. This example will
 ## rotate the motor left at a speed of 1234 for 2 seconds
 motor.rotate_left(1234)
@@ -110,7 +110,7 @@ Rotate the motor right-wards at the specified velocity.
 Execute a predefined user subroutine written to TMCM module firmware
 
 ##### `send (cmd, type, motorbank, value)`
-Send a raw TMCL command to the motor. 
+Send a raw TMCL command to the motor.
 
 ##### `stop ()`
 Stop the motor
