@@ -13,7 +13,7 @@ bus = pyTMCL.connect(serial_port)
 
 # Get the motor
 motor = bus.get_motor(MODULE_ADDRESS)
-
+motor.axis.max_positioning_speed = 200
 # From this point you can start issuing TMCL commands
 # to the motor as per the TMCL docs. This example will
 # rotate the motor left at a speed of 1234 for 2 seconds
@@ -27,8 +27,19 @@ def step_to_angle(step):
     return step * 1.8 / 256
 
 
+dir = False
+
+
 def callback():
-    print("position reached")
+    global dir
+    if dir:
+        sleep(1)
+        motor.move_relative(angle_to_steps(5 * 360 - 90), callback=callback)
+        dir = False
+    else:
+        sleep(1)
+        motor.move_relative(angle_to_steps(90), callback=callback)
+        dir = True
 
 
-motor.move_relative(angle_to_steps(360), callback=callback)
+callback()
