@@ -7,7 +7,7 @@ class TriggerThread(Thread):
     When the condition is reached, a callback function will be called.
     """
 
-    def __init__(self, condition, callback):
+    def __init__(self, condition, callback, args):
         """
         :condition:
                 Condition that needs to be reached
@@ -18,10 +18,11 @@ class TriggerThread(Thread):
         Thread.__init__(self)
         self.condition = condition
         self.callback = callback
+        self.args = args
         self.position_reached = Event()
 
     def run(self):
         while not self.position_reached.wait(0.01):
             if self.condition():
                 self.position_reached.set()
-        self.callback()
+        self.callback(self.args)
