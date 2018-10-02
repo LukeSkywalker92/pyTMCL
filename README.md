@@ -65,7 +65,7 @@ motor.stop()
 ### Example usage (multi-axis modules)
 ```python
 from serial import Serial
-import TMCL
+import pyTMCL
 
 ## Open the serial port presented by your rs485 adapter
 serial_port = Serial("/dev/tty.usbmodem1241")
@@ -91,11 +91,13 @@ API Overview
 
 #### class Motor (bus, address, axis)
 
-##### `move_absolute (position)`
+##### `move_absolute (position, callback)`
 Move the motor to the specified _absolute_ position.
+Call callback function when position is reached. (callback is optional).
 
-##### `move_relative (offset)`
+##### `move_relative (offset, callback)`
 Move the motor by the specified offset _relative to current position_.
+Call callback function when position is reached. (callback is optional).
 
 ##### `reference_search (rfs_type)`
 Start a reference search routine to locate limit switches.
