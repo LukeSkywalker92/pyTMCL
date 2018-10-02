@@ -78,18 +78,18 @@ class Motor(object):
         reply = self.send(Command.ROR, 0, self.motor_id, velocity)
         return reply.status
 
-    def move_absolute(self, position, callback=None):
+    def move_absolute(self, position, callback=None, args=[]):
         reply = self.send(Command.MVP, 0, self.motor_id, position)
         if callback is not None:
             TriggerThread(condition=self.get_position_reached,
-                          callback=callback).start()
+                          callback=callback, args=args).start()
         return reply.status
 
-    def move_relative(self, offset, callback=None):
+    def move_relative(self, offset, callback=None, args=[]):
         reply = self.send(Command.MVP, 1, self.motor_id, offset)
         if callback is not None:
             TriggerThread(condition=self.get_position_reached,
-                          callback=callback).start()
+                          callback=callback, args=args).start()
 
     def get_position_reached(self):
         return self.axis.target_position_reached
@@ -211,3 +211,19 @@ class AxisParameterInterface(object):
     @left_limit_switch_disabled.setter
     def left_limit_switch_disabled(self, value):
         self.set(13, 1 if value else 0)
+
+    @property
+    def pulse_divisor(self):
+        return self.get(154)
+
+    @pulse_divisor.setter
+    def pulse_divisor(self, value):
+        self.set(154, value)
+
+    @property
+    def ramp_divisor(self):
+        return self.get(153)
+
+    @ramp_divisor.setter
+    def ramp_divisor(self, value):
+        self.set(153, value)
