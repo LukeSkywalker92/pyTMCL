@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/LukeSkywalker92/pyTMCL.svg?branch=master)](https://travis-ci.com/LukeSkywalker92/pyTMCL)
+
 Python TMCL client library
 ==========================
 
