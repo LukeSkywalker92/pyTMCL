@@ -11,7 +11,7 @@ python:
  - "3.7-dev"
 
 install:
- - pip install wheel codecov coverage
+ - pip install wheel codecov coverage tox-travis
  - python setup.py bdist_wheel
  - pip install ./dist/pyTMCL-*.whl
 script: tox --installpkg ./dist/pyTMCL-*.whl
