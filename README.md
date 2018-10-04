@@ -1,7 +1,9 @@
-[![Build Status](https://travis-ci.com/LukeSkywalker92/pyTMCL.svg?branch=master)](https://travis-ci.com/LukeSkywalker92/pyTMCL)
-
 Python TMCL client library
 ==========================
+
+<p align="center">
+	[![Build Status](https://travis-ci.com/LukeSkywalker92/pyTMCL.svg?branch=master)](https://travis-ci.com/LukeSkywalker92/pyTMCL)
+</p>
 
 Clone of [NativeDesign/python-tmcl](https://github.com/NativeDesign/python-tmcl)
 
