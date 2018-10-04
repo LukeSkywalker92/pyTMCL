@@ -1,0 +1,64 @@
+os: linux
+sudo: false
+language: python
+
+matrix:
+  include:
+    - python: 3.6
+      env: TOXENV=py,simplejson,devel,lowest,codecov
+    - python: 3.6
+      env: TOXENV=docs-html
+    - python: 3.5
+      env: TOXENV=py,codecov
+    - python: 3.4
+      env: TOXENV=py,codecov
+    - python: 2.7
+      env: TOXENV=py,simplejson,devel,lowest,codecov
+    - python: pypy3
+      env: TOXENV=py,codecov
+    - python: nightly
+      env: TOXENV=py
+    - os: osx
+      language: generic
+      env: TOXENV=py3,py2,codecov
+      cache:
+        pip: false
+        directories:
+          - $HOME/Library/Caches/Homebrew
+          - $HOME/Library/Caches/pip
+  allow_failures:
+    - python: pypy3
+    - python: nightly
+    - os: osx
+  fast_finish: true
+
+before_install:
+  - |
+    if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+      brew upgrade python
+      brew install python@2;
+      export PATH="/usr/local/opt/python/libexec/bin:${PATH}"
+    fi
+install:
+  - pip install tox
+
+script:
+  - tox
+
+cache:
+  - pip
+
+branches:
+  only:
+    - master
+
+notifications:
+email: true
+
+deploy:
+  provider: pypi
+  user: lukecodewalker
+  password:
+    secure: BFYQvM9kSHPVwUq8Q49/VdkY/istxHn/J0waULwLJQDJoEy/a20iu2k+JPoog2zgorwvpVcbqpamVAjTQ4S3GfT5lsegTr1qhsD4bJfOm/Phe8GV+wWxEDBg6EzJUOxZyeMeVU2/b9y4zPGq5x9utJ9KYrm7S8KlVQfNsKl0Pi7hh9XST1P6K2h7aiSjPZsytDjw7YjTWiJgZ3lHzJwvUrYuRkiNb+VPqTvEnUdm116OzpAbYJXAMTM3XocyL6lPpdVk7I1zk/KBL847MMSrBWE7hT72MvAhOSCzksytcCBIphCGBp/KPYliSGkTc3Czl5Z3JN/aF+F5cQqnxO7pglO45+X4yTGU/VfeCE/YLDi8DUundxAo/tifBiTVV+sp6+5wjvOHlGxJ+qSAjECadQdY5mUFPjSwxfZglzpzVuO2+DMC3PwiUIaccnxPBiKHff0KRyBRRcETDCeCQ8rhtdIdjdrFoI0KEJRwALmXvUmI0Ho8MBQwGnXr7HKxMCvs0Qyd++K3z2gCKw5UOWoDqjwIidhVBQr1W1106wu3K8qsRup68Rt+nGpdsbp5hjeOTrB8Z+79StycjW+TnmT5BnNm+HbbOK4MRooZUFIF2aG9BwpkBh3nvZTYvIUC3nhWmsJ84REIjpJX4OvYNlUCSqk7G70V3oaIZ3YpJJ5LgHY=
+  on:
+    tags: true
