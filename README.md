@@ -1,6 +1,8 @@
 Python TMCL client library
 ==========================
 
+Clone of [NativeDesign/python-tmcl](https://github.com/NativeDesign/python-tmcl)
+
 Python wrapper around Trinamic's TMCL serial interface for controlling TMCM stepper modules
 via a serial-to-rs485 converter.
 
