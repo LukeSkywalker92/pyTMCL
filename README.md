@@ -4,8 +4,8 @@ Python TMCL client library
 <p align="center">
 	<a><img src="https://img.shields.io/github/last-commit/LukeSkywalker92/pyTMCL.svg" alt="Latest Comit"></a>
 	<a href="https://travis-ci.com/LukeSkywalker92/pyTMCL"><img src="https://travis-ci.com/LukeSkywalker92/pyTMCL.svg?branch=master" alt="Travis"></a>
-	<a href="https://badge.fury.io/py/pyTMCL"><img src="https://badge.fury.io/py/pyTMCL.svg" alt="PyPI version" height="18"></a>
-	<a><img src="https://https://img.shields.io/pypi/pyversions/pyTMCL.svg" alt="pyversions"></a>
+	<a href="https://badge.fury.io/py/pyTMCL"><img src="https://badge.fury.io/py/pyTMCL.svg" alt="PyPI version" height="20"></a>
+	<a><img src="https://img.shields.io/pypi/pyversions/pyTMCL.svg" alt="pyversions"></a>
 </p>
 
 Clone of [NativeDesign/python-tmcl](https://github.com/NativeDesign/python-tmcl)
