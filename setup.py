@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='pyTMCL',
-      version='1.0.1',
+      version='1.0.2',
       description='Talk to Trinamic Stepper Motors using TMCL over serial',
       long_description=long_description,
       long_description_content_type="text/markdown",
