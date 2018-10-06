@@ -78,18 +78,18 @@ class Motor(object):
         reply = self.send(Command.ROR, 0, self.motor_id, velocity)
         return reply.status
 
-    def move_absolute(self, position, callback=None, args=[]):
+    def move_absolute(self, position, callback=None, args=(), kwargs=None):
         reply = self.send(Command.MVP, 0, self.motor_id, position)
         if callback is not None:
             TriggerThread(condition=self.get_position_reached,
-                          callback=callback, args=args).start()
+                          callback=callback, args=*args, kwargs=**kwargs).start()
         return reply.status
 
-    def move_relative(self, offset, callback=None, args=[]):
+    def move_relative(self, offset, callback=None, args=(), kwargs=None):
         reply = self.send(Command.MVP, 1, self.motor_id, offset)
         if callback is not None:
             TriggerThread(condition=self.get_position_reached,
-                          callback=callback, args=args).start()
+                          callback=callback, args=*args, kwargs=**kwargs).start()
 
     def get_position_reached(self):
         return self.axis.target_position_reached
