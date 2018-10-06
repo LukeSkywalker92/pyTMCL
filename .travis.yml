@@ -1,27 +1,24 @@
 sudo: false
 language: python
 python:
- - "2.6"
- - "2.7"
- - "3.4"
- - "3.5"
- - "3.6"
- - "pypy"
- - "pypy3"
- - "3.7-dev"
-
+- '2.6'
+- '2.7'
+- '3.4'
+- '3.5'
+- '3.6'
+- pypy
+- pypy3
+- 3.7-dev
 install:
- - pip install wheel codecov coverage tox-travis
- - python setup.py bdist_wheel
- - pip install ./dist/pyTMCL-*.whl
+- pip install wheel codecov coverage tox-travis
+- python setup.py bdist_wheel
+- pip install ./dist/pyTMCL-*.whl
 script: tox --installpkg ./dist/pyTMCL-*.whl
 after_success: coverage combine && codecov
-
 stages:
-  - test
-  - name: deploy
-    if: tag IS present
-
+- test
+- name: deploy
+  if: tag IS present
 jobs:
   fast_finish: true
   include:
@@ -34,6 +31,6 @@ jobs:
       provider: pypi
       user: lukecodewalker
       password:
-        secure: BFYQvM9kSHPVwUq8Q49/VdkY/istxHn/J0waULwLJQDJoEy/a20iu2k+JPoog2zgorwvpVcbqpamVAjTQ4S3GfT5lsegTr1qhsD4bJfOm/Phe8GV+wWxEDBg6EzJUOxZyeMeVU2/b9y4zPGq5x9utJ9KYrm7S8KlVQfNsKl0Pi7hh9XST1P6K2h7aiSjPZsytDjw7YjTWiJgZ3lHzJwvUrYuRkiNb+VPqTvEnUdm116OzpAbYJXAMTM3XocyL6lPpdVk7I1zk/KBL847MMSrBWE7hT72MvAhOSCzksytcCBIphCGBp/KPYliSGkTc3Czl5Z3JN/aF+F5cQqnxO7pglO45+X4yTGU/VfeCE/YLDi8DUundxAo/tifBiTVV+sp6+5wjvOHlGxJ+qSAjECadQdY5mUFPjSwxfZglzpzVuO2+DMC3PwiUIaccnxPBiKHff0KRyBRRcETDCeCQ8rhtdIdjdrFoI0KEJRwALmXvUmI0Ho8MBQwGnXr7HKxMCvs0Qyd++K3z2gCKw5UOWoDqjwIidhVBQr1W1106wu3K8qsRup68Rt+nGpdsbp5hjeOTrB8Z+79StycjW+TnmT5BnNm+HbbOK4MRooZUFIF2aG9BwpkBh3nvZTYvIUC3nhWmsJ84REIjpJX4OvYNlUCSqk7G70V3oaIZ3YpJJ5LgHY=
+        secure: pjFOvos4EPRXyJK/kmetnRPd8EShjPaAtdleOlSgt1l9K8dtGygyKNGWURP6vFWfSKIbeDJPLsNiFZemFKdCYV415+QK040CXj+QGh3TGnw/oVi+PAXZjp0nwdtWC39BPXtv6NTdLK16qhk3lMpOqlIbh47I16Iuw50odkE48arBLdYB/oAJb2xbwPGHjueTSKIwhUVJhLzhD/PLiWg3mzYssTcMNn+ehYWUbI1zPVMi5jrfj1bkiHXDFz/4sDzMQVOjTpshLXa5/zPlNj/tNuepzLjIIS0JBUHjHuDF0nuHzclEjOIFP5lncbAcjBFzm9u3/vL2ao2xoUrpXwgpBSQaYyrz1l/0WYEHVPlFN6XWY6BJXvxxmDzr2oDMfnX9RbjIUpxUowHSKZH6NE0sPMbPxpnBEint/uJHIGUxjbthgLaO/Dt5b/ba/wuCe15/kBezCNPM+XxRb4ucHZ5Wkk20t5i1w3uMU0WAvRP34yJ6QxNoejSye2YMrRwbCZyqi0EE++hy+lzumMg4C87IM6Vod+OwyXsIHuDVQ/uCc+lMUdd7n6xJ+bmH97kMy+Cn5OpKVXgHMrlxSIXkmfwTEQhRLUrXRKoIG2TheeBxZWKqcbxc3YdlX2v0whYPBBk6d0QeAnW8U15tk7SMYC4EteIJdncIeqrWy1tGWE53wC4=
       on:
         tags: true
