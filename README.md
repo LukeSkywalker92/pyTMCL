@@ -48,7 +48,7 @@ each module is set to a _different_ serial-address so that they don't clash.
 ```python
 from serial import Serial
 from time import sleep
-import TMCL
+import pyTMCL
 
 ## serial-address as set on the TMCM module.
 MODULE_ADDRESS = 1
@@ -57,7 +57,7 @@ MODULE_ADDRESS = 1
 serial_port = Serial("/dev/tty.usbmodem1241")
 
 ## Create a Bus instance using the open serial port
-bus = TMCL.connect(serial_port)
+bus = pyTMCL.connect(serial_port)
 
 ## Get the motor
 motor = bus.get_motor(MODULE_ADDRESS)
@@ -80,7 +80,7 @@ import pyTMCL
 serial_port = Serial("/dev/tty.usbmodem1241")
 
 ## Create a Bus instance using the open serial port
-bus = TMCL.connect(serial_port)
+bus = pyTMCL.connect(serial_port)
 
 ## Get the motor on axis 0 of module with address 1
 module = bus.get_module( 1 )
@@ -109,8 +109,8 @@ bus = pyTMCL.connect(serial_port)
 # Get the motor
 motor = bus.get_motor(MODULE_ADDRESS)
 motor.axis.max_positioning_speed = 200
-# From this point you can start issuing TMCL commands
-# to the motor as per the TMCL docs. This example will
+# From this point you can start issuing pyTMCL commands
+# to the motor as per the pyTMCL docs. This example will
 # rotate the motor left at a speed of 1234 for 2 seconds
 
 
