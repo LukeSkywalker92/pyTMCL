@@ -227,3 +227,11 @@ class AxisParameterInterface(object):
     @ramp_divisor.setter
     def ramp_divisor(self, value):
         self.set(153, value)
+
+    @property
+    def freewheeling_delay(self):
+        return self.get(204)
+
+    @freewheeling_delay.setter
+    def freewheeling_delay(self, value):
+        self.set(204, value)
