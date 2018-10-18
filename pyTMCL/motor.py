@@ -47,11 +47,18 @@ class Motor(object):
         self.module_id = address
         self.motor_id = axis
         self.axis = AxisParameterInterface(self)
+        self.trigger_thread = None
 
     def send(self, cmd, type, motorbank, value):
         return self.bus.send(self.module_id, cmd, type, motorbank, value)
 
     def stop(self):
+        if self.trigger_thread is not None:
+            try:
+                self.trigger_thread.join()
+                print("JOINED")
+            except Exception as e:
+                pass
         self.send(Command.MST, 0, self.motor_id, 0)
 
     def get_axis_parameter(self, n):
@@ -81,15 +88,17 @@ class Motor(object):
     def move_absolute(self, position, callback=None, args=(), kwargs=None):
         reply = self.send(Command.MVP, 0, self.motor_id, position)
         if callback is not None:
-            TriggerThread(condition=self.get_position_reached,
-                          callback=callback, args=args, kwargs=kwargs).start()
+            self.trigger_thread = TriggerThread(condition=self.get_position_reached,
+                          callback=callback, args=args, kwargs=kwargs)
+            self.trigger_thread.start()
         return reply.status
 
     def move_relative(self, offset, callback=None, args=(), kwargs=None):
         reply = self.send(Command.MVP, 1, self.motor_id, offset)
         if callback is not None:
-            TriggerThread(condition=self.get_position_reached,
-                          callback=callback, args=args, kwargs=kwargs).start()
+            self.trigger_thread = TriggerThread(condition=self.get_position_reached,
+                          callback=callback, args=args, kwargs=kwargs)
+            self.trigger_thread.start()
 
     def get_position_reached(self):
         return self.axis.target_position_reached
