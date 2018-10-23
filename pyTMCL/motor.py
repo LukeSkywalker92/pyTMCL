@@ -55,8 +55,8 @@ class Motor(object):
     def stop(self):
         if self.trigger_thread is not None:
             try:
+                self.trigger_thread.condition_reached.set()
                 self.trigger_thread.join()
-                print("JOINED")
             except Exception as e:
                 pass
         self.send(Command.MST, 0, self.motor_id, 0)

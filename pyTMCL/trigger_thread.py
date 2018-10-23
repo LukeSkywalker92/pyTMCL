@@ -27,12 +27,12 @@ class TriggerThread(Thread):
         self._callback = callback
         self._args = args
         self._kwargs = kwargs
-        self._condition_reached = Event()
+        self.condition_reached = Event()
 
     def run(self):
-        while not self._condition_reached.wait(0.01):
+        while not self.condition_reached.wait(0.01):
             if self._condition():
-                self._condition_reached.set()
+                self.condition_reached.set()
         try:
             if self._callback:
                 self._callback(*self._args, **self._kwargs)
