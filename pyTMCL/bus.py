@@ -51,8 +51,8 @@ class Bus (object):
         else:
             checksum = self._binaryadd(
                 address, command, type, motorbank, value)
-            msg = struct.pack(MSG_STRUCTURE, address, command,
-                              type, motorbank, value, checksum)
+            msg = struct.pack(MSG_STRUCTURE, int(address), int(command),
+                              int(type), int(motorbank), int(value), int(checksum))
             self.serial.write(msg)
             rep = self.serial.read(REPLY_LENGTH)
             reply = Reply(struct.unpack(REPLY_STRUCTURE, rep))
@@ -99,9 +99,12 @@ class Bus (object):
 
     def _binaryadd(self, address, command, type, motorbank, value):
         checksum_struct = struct.pack(
-            MSG_STRUCTURE[:-1], address, command, type, motorbank, value)
+            MSG_STRUCTURE[:-1], int(address), int(command), int(type), int(motorbank), int(value))
         checksum = 0
         for s in checksum_struct:
-            checksum += int(s.encode('hex'), 16) % 256
+            try:
+                checksum += int(s.encode('hex'), 16) % 256
+            except:
+                checksum += s % 256
             checksum = checksum % 256
-        return checksum
+        return int(checksum)
